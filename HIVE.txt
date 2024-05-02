@@ -1,0 +1,96 @@
+start-all.sh
+
+schematool -initSchema -dbType derby
+
+ls
+
+cd apache-hive-3.1.2-bin
+
+cd bin
+
+ls
+
+schematool -dbType derby-initSchema
+
+hive
+
+show databases;
+
+create database db2;
+
+use db2;
+
+create table flight (fno int , year int , dest varchar(10) , delay float); 
+
+alter table flight rename to air_flight;
+
+alter table air_flight add columns (source varchar(10));
+
+create table flight (fno int , year int , dest varchar(10), delay float);
+
+insert into flight values (123 , 2009 , "Mumbai" , 30 .0 ) ;
+
+insert into flight values (123 , 2009 , "Mumbai" , 30.0) ;
+
+insert into flight values (342 , 2008 , "Nagpur" , 13.0) ;
+
+insert into flight values (712 , 2008 , "Pune" , 0.0) ;
+
+insert into flight values (103 , 2010 , "Banglore" , 10.0) ;
+
+ select * from flight;
+
+show tables;
+
+select * from flight;
+
+select * from air_flight;
+
+create table nflight (fno int , year int , source varchar(10));
+
+row format delimited;
+
+row format delimited
+     fields terminated by ','
+     lines terminated by '\n'
+     stored as textfile;
+
+delete table nflight;
+
+create table nflight (fno int , year int , source varchar(10))
+     row format delimited
+     fields terminated by ','
+     lines terminated by '\n'
+     stored as textfile;
+
+show tables;
+
+ delete  nflight;
+
+show tables;
+
+ create table nflights (fno int , year int , source varchar(10))
+     row format delimited
+     fields terminated by ','
+     lines terminated by '\n'
+     stored as textfile;
+
+insert into nflights values (121 , 2010, "Mumbai");
+
+insert into nflights values (133 , 2001, "Tokyo");
+
+insert into nflights values (457 , 2001, "USA");
+
+ insert into nflights values (158 , 2001, "USA");
+
+select * from nflights;
+
+ select * from flight;
+
+select * from flight join nflights on (fno = fno);
+
+ select * from flight a join nflights b on (a.fno = b.fno);
+
+ select * from flight;
+
+select a.fno , a.year , a.dest , a.delay , b.source  from flight a join nflights b on (a.fno = b.fno);
