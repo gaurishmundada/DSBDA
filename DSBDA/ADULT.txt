@@ -1,0 +1,44 @@
+import pandas as pd
+
+df = pd.read_csv('adult_dataset.csv')
+
+df
+
+df.describe()
+
+Create Data Subsets
+
+df.info()
+
+# First subset: Like and Share
+df_subset_1 = df[['workclass','education','capital-gain']]
+df_subset_1
+
+# second subset: Comment and Type
+df_subset_2 = df[['race','native-country']]
+df_subset_2
+
+Merge Data
+
+merged_data  = pd.concat([df_subset_1,df_subset_2],axis=1)
+merged_data
+
+Sort Data
+
+# Sorting merged_data in descending order wrt 'capital-gain'
+merged_data.sort_values(by=['capital-gain'],ascending=False)
+
+Transposing Data
+
+# Method 1
+merged_data.transpose()
+
+# Method 2
+merged_data.T
+
+Shape And Reshape Data
+
+df
+
+# Reshape
+pd.melt(df, id_vars =['education'], value_vars =['capital-gain'])
